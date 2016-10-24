@@ -1,9 +1,10 @@
 import UIKit
 
-protocol ViewControllerGraphProtocol {
+public protocol ViewControllerGraphProtocol {
     var rootViewController: UIViewController { get }
 }
 
-struct ViewControllerGraph: ViewControllerGraphProtocol {
-    var rootViewController = UIViewController()
+public struct ViewControllerGraph: ViewControllerGraphProtocol {
+    public init() {}
+    public let rootViewController: UIViewController = AuthenticationViewController()
 }
