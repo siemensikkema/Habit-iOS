@@ -24,28 +24,34 @@ private enum Field {
 }
 
 public final class AuthenticationViewController: ViewController {
-    private let table: Table = {
-        let initialFields: [Field] = [.email, .password, .username]
-        let section = Section(items: initialFields)
-        let dataSource = SimpleDataSource(sections: [section]) { field in
-            TableItem(EmailField.self, viewModel: "a@b.com")
-        }
-        return Table(dataSource: dataSource)
-    }()
-    private let tableView: UITableView = UITableView(frame: .zero, style: .plain).then {
-        $0.register(EmailField.self)
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.tableFooterView = UIView()
-        $0.rowHeight = UITableViewAutomaticDimension
-        $0.estimatedRowHeight = 50
-        $0.bounces = false
-    }
-
+    private let table: Table
+    private let tableView: UITableView
     let tableHeightConstraint: NSLayoutConstraint
 
     public init() {
+
+        let tableView = UITableView(frame: .zero, style: .plain).then {
+            $0.register(EmailField.self)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.tableFooterView = UIView()
+            $0.rowHeight = UITableViewAutomaticDimension
+            $0.estimatedRowHeight = 50
+            $0.bounces = false
+        }
+
+        let initialFields: [Field] = [.email, .password]
+        let section = Section(items: initialFields)
+        let dataSource = SimpleDataSource(sections: [section]) { (dataSource, field) -> TableItem in
+            TableItem(EmailField.self, viewModel: "a@b.com") { (_, indexPath) in
+                dataSource.sections = [Section(items: [.email, .username, .password])]
+                tableView.reloadData()
+            }
+        }
+        self.tableView = tableView
+        table = Table(dataSource: dataSource)
+
         tableHeightConstraint = tableView.heightAnchor.constraint(equalToConstant: 0)
-        tableHeightConstraint.isActive = true
+            .then { $0.isActive = true }
         super.init(nibName: nil, bundle: nil)
     }
 
