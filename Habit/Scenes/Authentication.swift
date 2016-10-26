@@ -1,3 +1,4 @@
+import Mortar
 import ReactiveCocoa
 import ReactiveSwift
 import Result
@@ -6,10 +7,10 @@ import UnclutterKit
 
 enum Field: Int {
     case signUpWithEmail
-    case alreadyHaveAccount
     case email
     case username
     case password
+    case alreadyHaveAccount
     case signUp
     case logIn
     case forgotPassword
@@ -20,7 +21,6 @@ extension UIButton {
     convenience init(title: String) {
         self.init()
         setTitle(title, for: .normal)
-        translatesAutoresizingMaskIntoConstraints = false
     }
 }
 extension UITextField {
@@ -28,7 +28,6 @@ extension UITextField {
         self.init()
         self.placeholder = placeholder
         self.isSecureTextEntry = secure
-        translatesAutoresizingMaskIntoConstraints = false
     }
 }
 
@@ -102,22 +101,19 @@ public final class AuthenticationViewController: ViewController {
     let resetPassword = UIButton(title: "Reset password").then { $0.isEnabled = false }
 
     public override init() {
-        let views: [UIView] = [
-            signUpWithEmail,
-            alreadyHaveAccount,
-            email,
-            username,
-            password,
-            signUp,
-            logIn,
-            forgotPassword,
-            resetPassword,
-            ]
+        let views: [UIView] = [signUpWithEmail,
+                               email,
+                               username,
+                               password,
+                               alreadyHaveAccount,
+                               signUp,
+                               logIn,
+                               forgotPassword,
+                               resetPassword]
         authenticationState = AuthenticationState(
             views: views,
             initiallyVisible: [.signUpWithEmail, .alreadyHaveAccount])
         stack = UIStackView(arrangedSubviews: views).then {
-            $0.translatesAutoresizingMaskIntoConstraints = false
             $0.axis = .vertical
             $0.distribution = .equalSpacing
             $0.alignment = .fill
@@ -132,58 +128,67 @@ public final class AuthenticationViewController: ViewController {
     override public func postInit() {
         view.backgroundColor = .lightGray
 
-        authenticationState.visibleFields <~ Signal.merge(
-            signUpWithEmail.onTrigger(yield: [.email, .username, .password, .signUp]),
-            alreadyHaveAccount.onTrigger(yield: [.email, .password, .logIn, .forgotPassword]),
-            forgotPassword.onTrigger(yield: [.email, .resetPassword]))
+        setUpAuthenticationStateChanges()
+        setUpButtonEnabledChanges()
+        setUpOutput()
+        setUpBackButton()
+        setUpSubviews()
+    }
 
-        let emailText = email.reactive.continuousTextValues.skipNil()
-        let usernameText = username.reactive.continuousTextValues.skipNil()
-        let passwordText = password.reactive.continuousTextValues.skipNil()
+    private func setUpBackButton() {
+        back.reactive.trigger(for: .touchUpInside).observeValues(authenticationState.goBack)
+        back.reactive.isHidden <~ authenticationState.history.map { $0.count <= 1 }
+    }
 
-        let validEmail = emailText.map(isValidEmailAddress)
-        let validUsername = usernameText.map(isValidUsername)
-        let validPassword = passwordText.map(isValidPassword)
+    private func setUpButtonEnabledChanges() {
+        let validEmail = email.nonNilValues.map(isValidEmailAddress)
+        let validUsername = username.nonNilValues.map(isValidUsername)
+        let validPassword = password.nonNilValues.map(isValidPassword)
 
         signUp.reactive.isEnabled <~ Signal
             .combineLatest(validEmail, validUsername, validPassword).map { $0 && $1 && $2 }
         logIn.reactive.isEnabled <~ Signal
             .combineLatest(validEmail, validPassword).map { $0 && $1 }
         resetPassword.reactive.isEnabled <~ validEmail
+    }
 
-        Signal.combineLatest(emailText, usernameText, passwordText)
+    private func setUpOutput() {
+        Signal.combineLatest(email.nonNilValues, username.nonNilValues, password.nonNilValues)
             .sample(on: signUp.reactive.trigger(for: .touchUpInside))
             .observeValues { (email, username, password) in
                 print("signUp", email, username, password)
         }
 
-        Signal.combineLatest(emailText, passwordText)
+        Signal.combineLatest(email.nonNilValues, password.nonNilValues)
             .sample(on: logIn.reactive.trigger(for: .touchUpInside))
             .observeValues { (email, password) in
                 print("logIn", email, password)
         }
 
-        emailText
+        email.nonNilValues
             .sample(on: resetPassword.reactive.trigger(for: .touchUpInside))
             .observeValues { (email) in
                 print("resetPassword", email)
         }
+    }
 
-        back.reactive.trigger(for: .touchUpInside).observeValues(authenticationState.goBack)
-        back.reactive.isHidden <~ authenticationState.history.map { $0.count <= 1 }
+    private func setUpAuthenticationStateChanges() {
+        authenticationState.visibleFields <~ Signal.merge(
+            signUpWithEmail.onTrigger(yield: [.email, .username, .password, .signUp]),
+            alreadyHaveAccount.onTrigger(yield: [.email, .password, .logIn, .forgotPassword]),
+            forgotPassword.onTrigger(yield: [.email, .resetPassword]))
+    }
 
-        view.addSubview(back)
-        view.addSubview(stack)
-        let margin: CGFloat = 25
-        [
-            stack.leftAnchor.constraint(equalTo: view.leftAnchor, constant: margin),
-            view.rightAnchor.constraint(equalTo: stack.rightAnchor, constant: margin),
-            view.centerYAnchor.constraint(equalTo: stack.centerYAnchor),
-            back.leftAnchor.constraint(equalTo: view.leftAnchor, constant: margin),
-            back.topAnchor.constraint(equalTo: view.topAnchor, constant: margin),
-            ].forEach {
-                $0.isActive = true
-        }
+    private func setUpSubviews() {
+        view |+| [back, stack]
+        stack |=| [view.m_leftMargin, view.m_rightMargin, view.m_centerY]
+        back |=| [m_topLayoutGuideTop, stack.m_left]
+    }
+}
+
+private extension UITextField {
+    var nonNilValues: Signal<String, NoError> {
+        return reactive.continuousTextValues.skipNil()
     }
 }
 
@@ -204,7 +209,6 @@ private func isValidEmailAddress(email: String) -> Bool {
 
 private let isValidUsername = validateStringLength(1)
 private let isValidPassword = validateStringLength(8)
-
 private let validateStringLength: (Int) -> (String) -> Bool = { length in
     { string in
         string.characters.count >= length

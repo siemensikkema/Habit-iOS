@@ -1,3 +1,4 @@
+github "jmfieldman/Mortar" "1.0.1"
 github "antitypical/Result" "3.0.0"
 github "ReactiveCocoa/ReactiveSwift" "1.0.0-alpha.3"
 github "ReactiveCocoa/ReactiveCocoa" "5.0.0-alpha.2"
