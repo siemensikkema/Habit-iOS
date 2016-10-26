@@ -19,6 +19,7 @@
 		5F47D4461DBFBC0000E719F7 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F47D4441DBFBC0000E719F7 /* Result.framework */; };
 		5F47D4491DBFC90C00E719F7 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F47D4481DBFC90C00E719F7 /* ReactiveCocoa.framework */; };
 		5F58DA681DC0980700754D30 /* Mortar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F58DA671DC0980700754D30 /* Mortar.framework */; };
+		5F58DA6B1DC0B62300754D30 /* NetworkAuthenticating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F58DA6A1DC0B62300754D30 /* NetworkAuthenticating.swift */; };
 		5F695D401DBE5E1B00D71328 /* UnclutterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F695D3B1DBE5D9B00D71328 /* UnclutterKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -115,6 +116,7 @@
 		5F47D4441DBFBC0000E719F7 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		5F47D4481DBFC90C00E719F7 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
 		5F58DA671DC0980700754D30 /* Mortar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mortar.framework; path = Carthage/Build/iOS/Mortar.framework; sourceTree = "<group>"; };
+		5F58DA6A1DC0B62300754D30 /* NetworkAuthenticating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkAuthenticating.swift; sourceTree = "<group>"; };
 		5F695D351DBE5D9B00D71328 /* UnclutterKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UnclutterKit.xcodeproj; path = UnclutterKit/UnclutterKit.xcodeproj; sourceTree = "<group>"; };
 		5F695D411DBE726F00D71328 /* Habit.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Habit.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -203,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				5F47D43A1DBEAB7F00E719F7 /* Scenes */,
+				5F58DA6A1DC0B62300754D30 /* NetworkAuthenticating.swift */,
 				5F24ED531DBE7747005C86FE /* ViewControllerGraph.swift */,
 			);
 			path = Habit;
@@ -499,6 +502,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F24ED571DBE776F005C86FE /* ViewControllerGraph.swift in Sources */,
+				5F58DA6B1DC0B62300754D30 /* NetworkAuthenticating.swift in Sources */,
 				5F47D43C1DBEAB7F00E719F7 /* Authentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

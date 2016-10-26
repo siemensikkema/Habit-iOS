@@ -24,10 +24,10 @@ extension UIButton {
     }
 }
 extension UITextField {
-    convenience init(placeholder: String? = nil, secure: Bool = false) {
+    convenience init(placeholder: String? = nil, isSecure: Bool = false) {
         self.init()
+        self.isSecureTextEntry = isSecure
         self.placeholder = placeholder
-        self.isSecureTextEntry = secure
     }
 }
 
@@ -84,12 +84,6 @@ final class AuthenticationState {
     }
 }
 
-protocol NetworkAuthenticating {
-    var resetPassword: Action<Email, (), NoError> { get }
-    var logIn: Action<(Email, Password), (), NoError> { get }
-    var signUp: Action<(Email, Username, Password), (), NoError> { get }
-}
-
 typealias Email = String
 typealias Username = String
 typealias Password = String
@@ -102,10 +96,10 @@ final class AuthenticationViewController: ViewController {
     let back = UIButton(title: "Back")
 
     let signUpWithEmail = UIButton(title: "Email")
-    let alreadyHaveAccount = UIButton(title: "I already have an account")
     let email = UITextField(placeholder: "Email")
     let username = UITextField(placeholder: "Username")
-    let password = UITextField(placeholder: "Password", secure: true)
+    let password = UITextField(placeholder: "Password", isSecure: true)
+    let alreadyHaveAccount = UIButton(title: "I already have an account")
     let signUp = UIButton(title: "Sign up").then { $0.isEnabled = false }
     let logIn = UIButton(title: "Log in").then { $0.isEnabled = false }
     let forgotPassword = UIButton(title: "Forgot password")
@@ -141,9 +135,9 @@ final class AuthenticationViewController: ViewController {
         view.backgroundColor = .lightGray
 
         setUpAuthenticationStateChanges()
+        setUpBackButton()
         setUpButtonEnabledChanges()
         setUpNetworkActions()
-        setUpBackButton()
         setUpSubviews()
     }
 
@@ -164,29 +158,29 @@ final class AuthenticationViewController: ViewController {
             return true
         }
 
-        signUp.reactive.isEnabled <~ Signal.combineLatest([
-            validEmail,
-            validUsername,
-            validPassword
-            ]).map(allTrue)
         logIn.reactive.isEnabled <~ Signal.combineLatest([
             validEmail,
             validPassword
             ]).map(allTrue)
         resetPassword.reactive.isEnabled <~ validEmail
+        signUp.reactive.isEnabled <~ Signal.combineLatest([
+            validEmail,
+            validUsername,
+            validPassword
+            ]).map(allTrue)
     }
 
     private func setUpNetworkActions() {
-        // sign up
-        Signal.combineLatest(email.nonNilValues, username.nonNilValues, password.nonNilValues)
-            .sample(on: signUp.reactive.trigger(for: .touchUpInside))
-            .flatMap(.latest, transform: networkAuthenticator.signUp.apply)
-            .observeCompleted {}
-
         // log in
         Signal.combineLatest(email.nonNilValues, password.nonNilValues)
             .sample(on: logIn.reactive.trigger(for: .touchUpInside))
             .flatMap(.latest, transform: networkAuthenticator.logIn.apply)
+            .observeCompleted {}
+
+        // sign up
+        Signal.combineLatest(email.nonNilValues, username.nonNilValues, password.nonNilValues)
+            .sample(on: signUp.reactive.trigger(for: .touchUpInside))
+            .flatMap(.latest, transform: networkAuthenticator.signUp.apply)
             .observeCompleted {}
 
         // reset password
@@ -199,15 +193,16 @@ final class AuthenticationViewController: ViewController {
 
     private func setUpAuthenticationStateChanges() {
         authenticationState.visibleFields <~ Signal.merge(
-            signUpWithEmail.onTrigger(yield: [.email, .username, .password, .signUp]),
             alreadyHaveAccount.onTrigger(yield: [.email, .password, .logIn, .forgotPassword]),
-            forgotPassword.onTrigger(yield: [.email, .resetPassword]))
+            forgotPassword.onTrigger(yield: [.email, .resetPassword]),
+            signUpWithEmail.onTrigger(yield: [.email, .username, .password, .signUp]))
     }
 
     private func setUpSubviews() {
         view |+| [back, stack]
-        stack |=| [view.m_leftMargin, view.m_rightMargin, view.m_centerY]
+
         back |=| [m_topLayoutGuideTop, stack.m_left]
+        stack |=| [view.m_leftMargin, view.m_rightMargin, view.m_centerY]
     }
 }
 
@@ -232,8 +227,8 @@ private func isValidEmailAddress(email: Email) -> Bool {
     return emailTest.evaluate(with: email)
 }
 
-private let isValidUsername = validateStringLength(1)
 private let isValidPassword = validateStringLength(8)
+private let isValidUsername = validateStringLength(1)
 private let validateStringLength: (Int) -> (String) -> Bool = { length in
     { string in
         string.characters.count >= length
