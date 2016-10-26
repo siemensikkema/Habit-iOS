@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F0DEAA41DC0C33000B2246E /* UnclutterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F695D3B1DBE5D9B00D71328 /* UnclutterKit.framework */; };
+		5F0DEAAA1DC0C5DC00B2246E /* UnclutterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F695D3B1DBE5D9B00D71328 /* UnclutterKit.framework */; };
+		5F0DEAAC1DC0C64900B2246E /* UnclutterKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5F695D3B1DBE5D9B00D71328 /* UnclutterKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5F24ED311DBE7667005C86FE /* Habit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F24ED281DBE7667005C86FE /* Habit.framework */; };
 		5F24ED381DBE7667005C86FE /* HabitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F24ED371DBE7667005C86FE /* HabitTests.swift */; };
 		5F24ED3D1DBE7667005C86FE /* Habit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F24ED281DBE7667005C86FE /* Habit.framework */; };
@@ -19,8 +22,7 @@
 		5F47D4461DBFBC0000E719F7 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F47D4441DBFBC0000E719F7 /* Result.framework */; };
 		5F47D4491DBFC90C00E719F7 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F47D4481DBFC90C00E719F7 /* ReactiveCocoa.framework */; };
 		5F58DA681DC0980700754D30 /* Mortar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F58DA671DC0980700754D30 /* Mortar.framework */; };
-		5F58DA6B1DC0B62300754D30 /* NetworkAuthenticating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F58DA6A1DC0B62300754D30 /* NetworkAuthenticating.swift */; };
-		5F695D401DBE5E1B00D71328 /* UnclutterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F695D3B1DBE5D9B00D71328 /* UnclutterKit.framework */; };
+		5F58DA6B1DC0B62300754D30 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F58DA6A1DC0B62300754D30 /* Authenticator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +32,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 5F0201A31DA4F8FB00D5C9E7;
 			remoteInfo = Habit;
+		};
+		5F0DEAA81DC0C5D500B2246E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5F695D351DBE5D9B00D71328 /* UnclutterKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5F2A74011D38284600F795AC;
+			remoteInfo = UnclutterKit;
 		};
 		5F24ED321DBE7667005C86FE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -66,13 +75,6 @@
 			remoteGlobalIDString = 5F2A74111D382A4600F795AC;
 			remoteInfo = UnclutterKitTests;
 		};
-		5F695D3E1DBE5DAA00D71328 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5F695D351DBE5D9B00D71328 /* UnclutterKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 5F2A74011D38284600F795AC;
-			remoteInfo = UnclutterKit;
-		};
 		5FB0DBDC1DBE94B100E5989B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5F695D351DBE5D9B00D71328 /* UnclutterKit.xcodeproj */;
@@ -83,6 +85,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		5F0DEAAB1DC0C63C00B2246E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5F0DEAAC1DC0C64900B2246E /* UnclutterKit.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5F24ED421DBE7667005C86FE /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -116,7 +128,7 @@
 		5F47D4441DBFBC0000E719F7 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		5F47D4481DBFC90C00E719F7 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
 		5F58DA671DC0980700754D30 /* Mortar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mortar.framework; path = Carthage/Build/iOS/Mortar.framework; sourceTree = "<group>"; };
-		5F58DA6A1DC0B62300754D30 /* NetworkAuthenticating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkAuthenticating.swift; sourceTree = "<group>"; };
+		5F58DA6A1DC0B62300754D30 /* Authenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
 		5F695D351DBE5D9B00D71328 /* UnclutterKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UnclutterKit.xcodeproj; path = UnclutterKit/UnclutterKit.xcodeproj; sourceTree = "<group>"; };
 		5F695D411DBE726F00D71328 /* Habit.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Habit.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,7 +138,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F695D401DBE5E1B00D71328 /* UnclutterKit.framework in Frameworks */,
+				5F0DEAAA1DC0C5DC00B2246E /* UnclutterKit.framework in Frameworks */,
 				5F24ED3D1DBE7667005C86FE /* Habit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -142,6 +154,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F0DEAA41DC0C33000B2246E /* UnclutterKit.framework in Frameworks */,
 				5F58DA681DC0980700754D30 /* Mortar.framework in Frameworks */,
 				5F47D4491DBFC90C00E719F7 /* ReactiveCocoa.framework in Frameworks */,
 				5F47D4451DBFBC0000E719F7 /* ReactiveSwift.framework in Frameworks */,
@@ -205,7 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				5F47D43A1DBEAB7F00E719F7 /* Scenes */,
-				5F58DA6A1DC0B62300754D30 /* NetworkAuthenticating.swift */,
+				5F58DA6A1DC0B62300754D30 /* Authenticator.swift */,
 				5F24ED531DBE7747005C86FE /* ViewControllerGraph.swift */,
 			);
 			path = Habit;
@@ -274,11 +287,13 @@
 				5F0201A11DA4F8FB00D5C9E7 /* Frameworks */,
 				5F0201A21DA4F8FB00D5C9E7 /* Resources */,
 				5F24ED421DBE7667005C86FE /* Embed Frameworks */,
+				5F0DEAAB1DC0C63C00B2246E /* CopyFiles */,
+				5F0516941DC0C75C005E2815 /* Carthage */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				5F695D3F1DBE5DAA00D71328 /* PBXTargetDependency */,
+				5F0DEAA91DC0C5D500B2246E /* PBXTargetDependency */,
 				5F24ED3C1DBE7667005C86FE /* PBXTargetDependency */,
 			);
 			name = App;
@@ -312,7 +327,6 @@
 				5F24ED241DBE7667005C86FE /* Frameworks */,
 				5F24ED251DBE7667005C86FE /* Headers */,
 				5F24ED261DBE7667005C86FE /* Resources */,
-				5F47D4471DBFBC2B00E719F7 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -460,16 +474,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5F47D4471DBFBC2B00E719F7 /* Carthage */ = {
+		5F0516941DC0C75C005E2815 /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Mortar.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ReactiveCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ReactiveSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Mortar.framework",
 			);
 			name = Carthage;
 			outputPaths = (
@@ -502,7 +516,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F24ED571DBE776F005C86FE /* ViewControllerGraph.swift in Sources */,
-				5F58DA6B1DC0B62300754D30 /* NetworkAuthenticating.swift in Sources */,
+				5F58DA6B1DC0B62300754D30 /* Authenticator.swift in Sources */,
 				5F47D43C1DBEAB7F00E719F7 /* Authentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -523,6 +537,11 @@
 			target = 5F0201A31DA4F8FB00D5C9E7 /* App */;
 			targetProxy = 5F0201B91DA4F8FB00D5C9E7 /* PBXContainerItemProxy */;
 		};
+		5F0DEAA91DC0C5D500B2246E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = UnclutterKit;
+			targetProxy = 5F0DEAA81DC0C5D500B2246E /* PBXContainerItemProxy */;
+		};
 		5F24ED331DBE7667005C86FE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5F24ED271DBE7667005C86FE /* Habit */;
@@ -537,11 +556,6 @@
 			isa = PBXTargetDependency;
 			target = 5F24ED271DBE7667005C86FE /* Habit */;
 			targetProxy = 5F24ED3B1DBE7667005C86FE /* PBXContainerItemProxy */;
-		};
-		5F695D3F1DBE5DAA00D71328 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = UnclutterKit;
-			targetProxy = 5F695D3E1DBE5DAA00D71328 /* PBXContainerItemProxy */;
 		};
 		5FB0DBDD1DBE94B100E5989B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -613,7 +627,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.unclutter.Habit;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -666,7 +680,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = nl.unclutter.Habit;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
