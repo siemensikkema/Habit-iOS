@@ -1,8 +1,8 @@
 import UIKit
 import PlaygroundSupport
-import Habit
+@testable import Habit
 
 let currentPage = PlaygroundPage.current
 
 currentPage.needsIndefiniteExecution = true
-currentPage.liveView = AuthenticationViewController()
+currentPage.liveView = AuthenticationViewController(networkAuthenticator: FakeNetworkAuthenticator())

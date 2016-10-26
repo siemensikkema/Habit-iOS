@@ -84,10 +84,21 @@ final class AuthenticationState {
     }
 }
 
-public final class AuthenticationViewController: ViewController {
-    let authenticationState: AuthenticationState
-    let stack: UIStackView
+protocol NetworkAuthenticating {
+    var resetPassword: Action<Email, (), NoError> { get }
+    var logIn: Action<(Email, Password), (), NoError> { get }
+    var signUp: Action<(Email, Username, Password), (), NoError> { get }
+}
 
+typealias Email = String
+typealias Username = String
+typealias Password = String
+
+final class AuthenticationViewController: ViewController {
+    let authenticationState: AuthenticationState
+    let networkAuthenticator: NetworkAuthenticating
+
+    let stack: UIStackView
     let back = UIButton(title: "Back")
 
     let signUpWithEmail = UIButton(title: "Email")
@@ -100,7 +111,7 @@ public final class AuthenticationViewController: ViewController {
     let forgotPassword = UIButton(title: "Forgot password")
     let resetPassword = UIButton(title: "Reset password").then { $0.isEnabled = false }
 
-    public override init() {
+    init(networkAuthenticator: NetworkAuthenticating) {
         let views: [UIView] = [signUpWithEmail,
                                email,
                                username,
@@ -118,19 +129,20 @@ public final class AuthenticationViewController: ViewController {
             $0.distribution = .equalSpacing
             $0.alignment = .fill
         }
+        self.networkAuthenticator = networkAuthenticator
         super.init()
     }
 
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override public func postInit() {
+    override func postInit() {
         view.backgroundColor = .lightGray
 
         setUpAuthenticationStateChanges()
         setUpButtonEnabledChanges()
-        setUpOutput()
+        setUpNetworkActions()
         setUpBackButton()
         setUpSubviews()
     }
@@ -145,31 +157,44 @@ public final class AuthenticationViewController: ViewController {
         let validUsername = username.nonNilValues.map(isValidUsername)
         let validPassword = password.nonNilValues.map(isValidPassword)
 
-        signUp.reactive.isEnabled <~ Signal
-            .combineLatest(validEmail, validUsername, validPassword).map { $0 && $1 && $2 }
-        logIn.reactive.isEnabled <~ Signal
-            .combineLatest(validEmail, validPassword).map { $0 && $1 }
+        func allTrue(values: [Bool]) -> Bool {
+            for value in values where value == false {
+                return false
+            }
+            return true
+        }
+
+        signUp.reactive.isEnabled <~ Signal.combineLatest([
+            validEmail,
+            validUsername,
+            validPassword
+            ]).map(allTrue)
+        logIn.reactive.isEnabled <~ Signal.combineLatest([
+            validEmail,
+            validPassword
+            ]).map(allTrue)
         resetPassword.reactive.isEnabled <~ validEmail
     }
 
-    private func setUpOutput() {
+    private func setUpNetworkActions() {
+        // sign up
         Signal.combineLatest(email.nonNilValues, username.nonNilValues, password.nonNilValues)
             .sample(on: signUp.reactive.trigger(for: .touchUpInside))
-            .observeValues { (email, username, password) in
-                print("signUp", email, username, password)
-        }
+            .flatMap(.latest, transform: networkAuthenticator.signUp.apply)
+            .observeCompleted {}
 
+        // log in
         Signal.combineLatest(email.nonNilValues, password.nonNilValues)
             .sample(on: logIn.reactive.trigger(for: .touchUpInside))
-            .observeValues { (email, password) in
-                print("logIn", email, password)
-        }
+            .flatMap(.latest, transform: networkAuthenticator.logIn.apply)
+            .observeCompleted {}
 
+        // reset password
         email.nonNilValues
             .sample(on: resetPassword.reactive.trigger(for: .touchUpInside))
-            .observeValues { (email) in
-                print("resetPassword", email)
-        }
+            .flatMap(.latest, transform: networkAuthenticator.resetPassword.apply)
+            .on(value: authenticationState.goBack)
+            .observeCompleted {}
     }
 
     private func setUpAuthenticationStateChanges() {
@@ -200,7 +225,7 @@ private extension UIControl {
 }
 
 // attribution: http://stackoverflow.com/a/25471164/5752402
-private func isValidEmailAddress(email: String) -> Bool {
+private func isValidEmailAddress(email: Email) -> Bool {
     let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
 
     let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
