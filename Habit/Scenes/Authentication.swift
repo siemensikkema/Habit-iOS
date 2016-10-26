@@ -208,8 +208,8 @@ final class AuthenticationViewController: ViewController {
     private func setUpSubviews() {
         view |+| [back, cancel, stack]
 
-        back |=| [m_topLayoutGuideTop, stack.m_left]
-        cancel |=| [m_topLayoutGuideTop, stack.m_right]
+        [back.m_top, cancel.m_top] |=| [m_topLayoutGuideBottom, m_topLayoutGuideBottom]
+        [back, cancel] |=| [stack.m_left, stack.m_right]
         stack |=| [view.m_leftMargin, view.m_rightMargin, view.m_centerY]
     }
 }
