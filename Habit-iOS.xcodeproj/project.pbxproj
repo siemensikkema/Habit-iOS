@@ -15,6 +15,9 @@
 		5F24ED551DBE7763005C86FE /* AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F24ED4F1DBE7747005C86FE /* AppTests.swift */; };
 		5F24ED571DBE776F005C86FE /* ViewControllerGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F24ED531DBE7747005C86FE /* ViewControllerGraph.swift */; };
 		5F47D43C1DBEAB7F00E719F7 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F47D43B1DBEAB7F00E719F7 /* Authentication.swift */; };
+		5F47D4451DBFBC0000E719F7 /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F47D4431DBFBC0000E719F7 /* ReactiveSwift.framework */; };
+		5F47D4461DBFBC0000E719F7 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F47D4441DBFBC0000E719F7 /* Result.framework */; };
+		5F47D4491DBFC90C00E719F7 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F47D4481DBFC90C00E719F7 /* ReactiveCocoa.framework */; };
 		5F695D401DBE5E1B00D71328 /* UnclutterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F695D3B1DBE5D9B00D71328 /* UnclutterKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -107,6 +110,9 @@
 		5F24ED501DBE7747005C86FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F24ED531DBE7747005C86FE /* ViewControllerGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerGraph.swift; sourceTree = "<group>"; };
 		5F47D43B1DBEAB7F00E719F7 /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		5F47D4431DBFBC0000E719F7 /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
+		5F47D4441DBFBC0000E719F7 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		5F47D4481DBFC90C00E719F7 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
 		5F695D351DBE5D9B00D71328 /* UnclutterKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UnclutterKit.xcodeproj; path = UnclutterKit/UnclutterKit.xcodeproj; sourceTree = "<group>"; };
 		5F695D411DBE726F00D71328 /* Habit.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Habit.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +138,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F47D4491DBFC90C00E719F7 /* ReactiveCocoa.framework in Frameworks */,
+				5F47D4451DBFBC0000E719F7 /* ReactiveSwift.framework in Frameworks */,
+				5F47D4461DBFBC0000E719F7 /* Result.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +213,16 @@
 			path = Scenes;
 			sourceTree = "<group>";
 		};
+		5F47D4421DBFBC0000E719F7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5F47D4481DBFC90C00E719F7 /* ReactiveCocoa.framework */,
+				5F47D4431DBFBC0000E719F7 /* ReactiveSwift.framework */,
+				5F47D4441DBFBC0000E719F7 /* Result.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5F695D361DBE5D9B00D71328 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +242,7 @@
 				5F24ED511DBE7747005C86FE /* Habit */,
 				5F24ED361DBE7667005C86FE /* HabitTests */,
 				5F0201A51DA4F8FB00D5C9E7 /* Products */,
+				5F47D4421DBFBC0000E719F7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -285,6 +305,7 @@
 				5F24ED241DBE7667005C86FE /* Frameworks */,
 				5F24ED251DBE7667005C86FE /* Headers */,
 				5F24ED261DBE7667005C86FE /* Resources */,
+				5F47D4471DBFBC2B00E719F7 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -431,6 +452,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5F47D4471DBFBC2B00E719F7 /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5F0201A01DA4F8FB00D5C9E7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -562,7 +603,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = nl.unclutter.HabitApp;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.unclutter.Habit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -615,7 +656,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = nl.unclutter.HabitApp;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.unclutter.Habit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -767,6 +808,10 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -787,7 +832,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = nl.unclutter.Habit;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.unclutter.HabitFramework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -833,6 +878,10 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -846,7 +895,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = nl.unclutter.Habit;
+				PRODUCT_BUNDLE_IDENTIFIER = nl.unclutter.HabitFramework;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
