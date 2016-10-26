@@ -1,13 +1,13 @@
 import ReactiveSwift
 import Result
 
-protocol NetworkAuthenticating {
+protocol Authenticating {
     var logIn: Action<(Email, Password), (), NoError> { get }
     var resetPassword: Action<Email, (), NoError> { get }
     var signUp: Action<(Email, Username, Password), (), NoError> { get }
 }
 
-struct FakeNetworkAuthenticator: NetworkAuthenticating {
+struct FakeAuthenticator: Authenticating {
     var logIn = Action<(Email, Password), (), NoError> {
         print("log in with email: \($0), password: \($1)")
         return SignalProducer(value: ())

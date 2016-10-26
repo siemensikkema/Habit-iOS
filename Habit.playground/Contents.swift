@@ -5,4 +5,4 @@ import PlaygroundSupport
 let currentPage = PlaygroundPage.current
 
 currentPage.needsIndefiniteExecution = true
-currentPage.liveView = AuthenticationViewController(networkAuthenticator: FakeNetworkAuthenticator())
+currentPage.liveView = AuthenticationViewController(authenticator: FakeAuthenticator()) { print("done!") }

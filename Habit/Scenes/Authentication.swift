@@ -5,7 +5,7 @@ import Result
 import UIKit
 import UnclutterKit
 
-enum Field: Int {
+fileprivate enum Field: Int {
     case signUpWithEmail
     case email
     case username
@@ -31,7 +31,7 @@ extension UITextField {
     }
 }
 
-final class AuthenticationState {
+fileprivate final class AuthenticationState {
     let history = MutableProperty<[[Field]]>([])
     let visibleFields: MutableProperty<[Field]>
     private let views: [UIView]
@@ -89,23 +89,26 @@ typealias Username = String
 typealias Password = String
 
 final class AuthenticationViewController: ViewController {
-    let authenticationState: AuthenticationState
-    let networkAuthenticator: NetworkAuthenticating
+    private let authenticationState: AuthenticationState
+    private let authenticator: Authenticating
+    private let done: () -> Void
 
-    let stack: UIStackView
-    let back = UIButton(title: "Back")
+    private let cancel = UIButton(title: "Cancel")
+    private let stack: UIStackView
+    private let back = UIButton(title: "Back")
 
-    let signUpWithEmail = UIButton(title: "Email")
-    let email = UITextField(placeholder: "Email")
-    let username = UITextField(placeholder: "Username")
-    let password = UITextField(placeholder: "Password", isSecure: true)
-    let alreadyHaveAccount = UIButton(title: "I already have an account")
-    let signUp = UIButton(title: "Sign up").then { $0.isEnabled = false }
-    let logIn = UIButton(title: "Log in").then { $0.isEnabled = false }
-    let forgotPassword = UIButton(title: "Forgot password")
-    let resetPassword = UIButton(title: "Reset password").then { $0.isEnabled = false }
+    // Field related views
+    private let signUpWithEmail = UIButton(title: "Email")
+    private let email = UITextField(placeholder: "Email")
+    private let username = UITextField(placeholder: "Username")
+    private let password = UITextField(placeholder: "Password", isSecure: true)
+    private let alreadyHaveAccount = UIButton(title: "I already have an account")
+    private let signUp = UIButton(title: "Sign up").then { $0.isEnabled = false }
+    private let logIn = UIButton(title: "Log in").then { $0.isEnabled = false }
+    private let forgotPassword = UIButton(title: "Forgot password")
+    private let resetPassword = UIButton(title: "Reset password").then { $0.isEnabled = false }
 
-    init(networkAuthenticator: NetworkAuthenticating) {
+    init(authenticator: Authenticating, done: @escaping () -> Void) {
         let views: [UIView] = [signUpWithEmail,
                                email,
                                username,
@@ -123,7 +126,8 @@ final class AuthenticationViewController: ViewController {
             $0.distribution = .equalSpacing
             $0.alignment = .fill
         }
-        self.networkAuthenticator = networkAuthenticator
+        self.authenticator = authenticator
+        self.done = done
         super.init()
     }
 
@@ -132,6 +136,7 @@ final class AuthenticationViewController: ViewController {
     }
 
     override func postInit() {
+        cancel.reactive.trigger(for: .touchUpInside).observeValues(done)
         view.backgroundColor = .lightGray
 
         setUpAuthenticationStateChanges()
@@ -174,19 +179,21 @@ final class AuthenticationViewController: ViewController {
         // log in
         Signal.combineLatest(email.nonNilValues, password.nonNilValues)
             .sample(on: logIn.reactive.trigger(for: .touchUpInside))
-            .flatMap(.latest, transform: networkAuthenticator.logIn.apply)
+            .flatMap(.latest, transform: authenticator.logIn.apply)
+            .on(value: done)
             .observeCompleted {}
 
         // sign up
         Signal.combineLatest(email.nonNilValues, username.nonNilValues, password.nonNilValues)
             .sample(on: signUp.reactive.trigger(for: .touchUpInside))
-            .flatMap(.latest, transform: networkAuthenticator.signUp.apply)
+            .flatMap(.latest, transform: authenticator.signUp.apply)
+            .on(value: done)
             .observeCompleted {}
 
         // reset password
         email.nonNilValues
             .sample(on: resetPassword.reactive.trigger(for: .touchUpInside))
-            .flatMap(.latest, transform: networkAuthenticator.resetPassword.apply)
+            .flatMap(.latest, transform: authenticator.resetPassword.apply)
             .on(value: authenticationState.goBack)
             .observeCompleted {}
     }
@@ -199,9 +206,10 @@ final class AuthenticationViewController: ViewController {
     }
 
     private func setUpSubviews() {
-        view |+| [back, stack]
+        view |+| [back, cancel, stack]
 
         back |=| [m_topLayoutGuideTop, stack.m_left]
+        cancel |=| [m_topLayoutGuideTop, stack.m_right]
         stack |=| [view.m_leftMargin, view.m_rightMargin, view.m_centerY]
     }
 }
