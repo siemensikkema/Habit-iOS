@@ -31,7 +31,7 @@ extension UITextField {
     }
 }
 
-fileprivate final class AuthenticationState {
+fileprivate struct AuthenticationState {
     let history = MutableProperty<[[Field]]>([])
     let visibleFields: MutableProperty<[Field]>
     private let views: [UIView]
@@ -40,13 +40,19 @@ fileprivate final class AuthenticationState {
         self.views = views
 
         visibleFields = MutableProperty(fields)
+    }
+
+    func setUp(with lifetime: Lifetime) {
         visibleFields.producer
-            .startWithValues { fields in
-                self.history.modify {
+            .take(during: lifetime)
+            .startWithValues { [weak history] fields in
+                history?.modify {
                     $0.append(fields)
                 }
         }
+
         history.producer
+            .take(during: lifetime)
             .map { $0.last }
             .skipNil()
             .startWithValues(animateVisibleFields)
@@ -121,7 +127,8 @@ final class AuthenticationViewController: ViewController {
         authenticationState = AuthenticationState(
             views: views,
             initiallyVisible: [.signUpWithEmail, .alreadyHaveAccount])
-        stack = UIStackView(arrangedSubviews: views).then {
+        stack = UIStackView(arrangedSubviews: views)
+            .then {
             $0.axis = .vertical
             $0.distribution = .equalSpacing
             $0.alignment = .fill
@@ -136,19 +143,19 @@ final class AuthenticationViewController: ViewController {
     }
 
     override func postInit() {
-        cancel.reactive.trigger(for: .touchUpInside).observeValues(done)
         view.backgroundColor = .lightGray
 
         setUpAuthenticationStateChanges()
-        setUpBackButton()
+        setUpButtons()
         setUpButtonEnabledChanges()
         setUpNetworkActions()
         setUpSubviews()
     }
 
-    private func setUpBackButton() {
+    private func setUpButtons() {
         back.reactive.trigger(for: .touchUpInside).observeValues(authenticationState.goBack)
         back.reactive.isHidden <~ authenticationState.history.map { $0.count <= 1 }
+        cancel.reactive.trigger(for: .touchUpInside).observeValues(done)
     }
 
     private func setUpButtonEnabledChanges() {
@@ -180,6 +187,7 @@ final class AuthenticationViewController: ViewController {
         Signal.combineLatest(email.nonNilValues, password.nonNilValues)
             .sample(on: logIn.reactive.trigger(for: .touchUpInside))
             .flatMap(.latest, transform: authenticator.logIn.apply)
+            .take(during: reactive.lifetime)
             .on(value: done)
             .observeCompleted {}
 
@@ -187,6 +195,7 @@ final class AuthenticationViewController: ViewController {
         Signal.combineLatest(email.nonNilValues, username.nonNilValues, password.nonNilValues)
             .sample(on: signUp.reactive.trigger(for: .touchUpInside))
             .flatMap(.latest, transform: authenticator.signUp.apply)
+            .take(during: reactive.lifetime)
             .on(value: done)
             .observeCompleted {}
 
@@ -194,11 +203,13 @@ final class AuthenticationViewController: ViewController {
         email.nonNilValues
             .sample(on: resetPassword.reactive.trigger(for: .touchUpInside))
             .flatMap(.latest, transform: authenticator.resetPassword.apply)
+            .take(during: reactive.lifetime)
             .on(value: authenticationState.goBack)
             .observeCompleted {}
     }
 
     private func setUpAuthenticationStateChanges() {
+        authenticationState.setUp(with: reactive.lifetime)
         authenticationState.visibleFields <~ Signal.merge(
             alreadyHaveAccount.onTrigger(yield: [.email, .password, .logIn, .forgotPassword]),
             forgotPassword.onTrigger(yield: [.email, .resetPassword]),

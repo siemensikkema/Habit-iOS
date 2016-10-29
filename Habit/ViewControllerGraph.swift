@@ -6,19 +6,20 @@ public protocol ViewControllerGraphProtocol {
 }
 
 public class ViewControllerGraph: ViewControllerGraphProtocol {
-    let authenticator: Authenticating = FakeAuthenticator()
+    public let rootViewController = UIViewController()
 
     public init() {
+        let authenticator: Authenticating = FakeAuthenticator()
+        let vc = AuthenticationViewController(authenticator: authenticator) {
+            self.rootViewController.dismiss(animated: true, completion: nil)
+        }
+
         rootViewController
             .reactive
             .trigger(for: #selector(UIViewController.viewDidAppear))
             .take(first: 1)
-            .observeValues { [authenticator, rootViewController] _ in
-                let vc = AuthenticationViewController(authenticator: authenticator) {
-                    rootViewController.dismiss(animated: true, completion: nil)
-                }
-                rootViewController.present(vc, animated: true, completion: nil)
+            .observeValues {
+                self.rootViewController.present(vc, animated: true, completion: nil)
         }
     }
-    public let rootViewController = UIViewController()
 }
