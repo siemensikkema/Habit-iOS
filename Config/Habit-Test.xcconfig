@@ -1,2 +1,4 @@
 #include "xcconfigs/Base/Configurations/Test.xcconfig"
 #include "xcconfigs/iOS/iOS-Base.xcconfig"
+
+TEST_HOST = $(BUILT_PRODUCTS_DIR)/Habit.app/Habit

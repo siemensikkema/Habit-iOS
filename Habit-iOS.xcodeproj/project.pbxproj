@@ -732,9 +732,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5F65E2C21DCF625100250ECA /* Habit-Application.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 			};
 			name = Debug;
 		};
@@ -742,9 +739,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5F65E2C21DCF625100250ECA /* Habit-Application.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 			};
 			name = Release;
 		};
@@ -752,13 +746,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5FAC3AF51DCFCEFE0097569F /* Habit-Test.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Habit.app/Habit";
 			};
 			name = Debug;
 		};
@@ -766,13 +753,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5FAC3AF51DCFCEFE0097569F /* Habit-Test.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Habit.app/Habit";
 			};
 			name = Release;
 		};
@@ -780,10 +760,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5F65E2C11DCF618E00250ECA /* Core.xcconfig */;
 			buildSettings = {
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = Core;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -791,10 +767,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5F65E2C11DCF618E00250ECA /* Core.xcconfig */;
 			buildSettings = {
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = Core;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -802,14 +774,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5FAC3AF51DCFCEFE0097569F /* Habit-Test.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = SVLC8Q2884;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = CoreTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Habit.app/Habit";
 			};
 			name = Debug;
 		};
@@ -817,14 +781,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5FAC3AF51DCFCEFE0097569F /* Habit-Test.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = SVLC8Q2884;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = CoreTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Habit.app/Habit";
 			};
 			name = Release;
 		};

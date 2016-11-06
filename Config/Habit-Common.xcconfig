@@ -5,3 +5,51 @@ SWIFT_VERSION = 3.0.1
 PRODUCT_NAME = $(TARGET_NAME)
 INFOPLIST_FILE = $(SRCROOT)/$(TARGET_NAME)/Info.plist
 PRODUCT_BUNDLE_IDENTIFIER = nl.unclutter.$(TARGET_NAME)
+CLANG_WARN_SUSPICIOUS_MOVE = YES
+
+// Apple LLVM 8.0 - Warnings - All languages
+
+// Pedantic warnings
+GCC_WARN_PEDANTIC = YES
+
+// Documentation comments
+CLANG_WARN_DOCUMENTATION_COMMENTS = YES
+
+// Hidden local variables
+GCC_WARN_SHADOW = YES
+
+// Implicit signedness conversions
+CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES
+
+// Missing function prototypes
+GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES
+
+// Missing newline at end of file
+GCC_WARN_ABOUT_MISSING_NEWLINE = YES
+
+// Out of range enum assignments
+CLANG_WARN_ASSIGN_ENUM = YES
+
+// Treat incompatible pointer type warnings as errors
+GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES
+
+// Treat missing function prototypes as errors
+GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES
+
+// Unknown pragma
+GCC_WARN_UNKNOWN_PRAGMAS = YES
+
+// Unused parameters
+GCC_WARN_UNUSED_PARAMETER = YES
+
+// Static Analyzer - Generic Issues
+
+// Missing localizability
+CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES
+
+// Missing localization context comment
+CLANG_ANALYZER_LOCALIZABILITY_EMPTY_CONTEXT = YES
+
+
+
+
