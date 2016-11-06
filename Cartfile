@@ -1,4 +1,4 @@
-github "jmfieldman/Mortar"
+github "siemensikkema/Mortar" "master"
 github "Quick/Quick"
 github "Quick/Nimble"
 github "ReactiveCocoa/ReactiveCocoa" "5.0.0-alpha.3"
