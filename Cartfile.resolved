@@ -1,5 +1,5 @@
-github "siemensikkema/Mortar" "ef8b3cdc462c11c9a435922d173a998b16df535f"
-github "Quick/Nimble" "v5.1.0"
+github "jmfieldman/Mortar" "1.1.0"
+github "Quick/Nimble" "v5.1.1"
 github "Quick/Quick" "v0.10.0"
 github "antitypical/Result" "3.0.0"
 github "ReactiveCocoa/ReactiveSwift" "1.0.0-alpha.3"
