@@ -7,17 +7,26 @@ protocol Authenticating {
     var signUp: Action<(Email, Username, Password), (), NoError> { get }
 }
 
-struct FakeAuthenticator: Authenticating {
-    let logIn = Action<(Email, Password), (), NoError> {
-        print("log in with email: \($0), password: \($1)")
-        return SignalProducer(value: ())
-    }
-    let resetPassword = Action<Email, (), NoError> {
-        print("reset password for email: \($0)")
-        return SignalProducer(value: ())
-    }
-    let signUp = Action<(Email, Username, Password), (), NoError> {
-        print("sign up with email: \($0), username: \($1), password: \($2)")
-        return SignalProducer(value: ())
+final class Credentials {
+    var email: Email?
+    var password: Password?
+    var username: Username?
+}
+
+struct Authenticator: Authenticating {
+    var logIn: Action<(Email, Password), (), NoError>
+    var resetPassword: Action<Email, (), NoError>
+    var signUp: Action<(Email, Username, Password), (), NoError>
+
+    init() {
+        logIn = Action<(Email, Password), (), NoError> { _ in
+            return SignalProducer(value: ())
+        }
+        resetPassword = Action<Email, (), NoError> { _ in
+            return SignalProducer(value: ())
+        }
+        signUp = Action<(Email, Username, Password), (), NoError> { _ in
+            return SignalProducer(value: ())
+        }
     }
 }

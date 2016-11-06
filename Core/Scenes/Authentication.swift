@@ -59,7 +59,6 @@ fileprivate struct AuthenticationState {
     }
 
     func goBack() {
-        guard history.value.count > 1 else { return }
         history.modify {
             $0.removeLast()
         }
@@ -99,20 +98,20 @@ final class AuthenticationViewController: ViewController {
     private let authenticator: Authenticating
     private let done: () -> Void
 
+    let back = UIButton(title: "Back")
     let cancel = UIButton(title: "Cancel")
-    private let stack: UIStackView
-    private let back = UIButton(title: "Back")
+    let stack: UIStackView
 
     // Field related views
-    private let signUpWithEmail = UIButton(title: "Email")
-    private let email = UITextField(placeholder: "Email")
-    private let username = UITextField(placeholder: "Username")
-    private let password = UITextField(placeholder: "Password", isSecure: true)
-    private let alreadyHaveAccount = UIButton(title: "I already have an account")
-    private let signUp = UIButton(title: "Sign up").then { $0.isEnabled = false }
-    private let logIn = UIButton(title: "Log in").then { $0.isEnabled = false }
-    private let forgotPassword = UIButton(title: "Forgot password")
-    private let resetPassword = UIButton(title: "Reset password").then { $0.isEnabled = false }
+    let signUpWithEmail = UIButton(title: "Email")
+    let email = UITextField(placeholder: "Email")
+    let username = UITextField(placeholder: "Username")
+    let password = UITextField(placeholder: "Password", isSecure: true)
+    let alreadyHaveAccount = UIButton(title: "I already have an account")
+    let signup = UIButton(title: "Sign up").then { $0.isEnabled = false }
+    let login = UIButton(title: "Log in").then { $0.isEnabled = false }
+    let forgotPassword = UIButton(title: "Forgot password")
+    let resetPassword = UIButton(title: "Reset password").then { $0.isEnabled = false }
 
     init(authenticator: Authenticating, done: @escaping () -> Void) {
         let views: [UIView] = [signUpWithEmail,
@@ -120,8 +119,8 @@ final class AuthenticationViewController: ViewController {
                                username,
                                password,
                                alreadyHaveAccount,
-                               signUp,
-                               logIn,
+                               signup,
+                               login,
                                forgotPassword,
                                resetPassword]
         authenticationState = AuthenticationState(
@@ -170,12 +169,12 @@ final class AuthenticationViewController: ViewController {
             return true
         }
 
-        logIn.reactive.isEnabled <~ Signal.combineLatest([
+        login.reactive.isEnabled <~ Signal.combineLatest([
             validEmail,
             validPassword
             ]).map(allTrue)
         resetPassword.reactive.isEnabled <~ validEmail
-        signUp.reactive.isEnabled <~ Signal.combineLatest([
+        signup.reactive.isEnabled <~ Signal.combineLatest([
             validEmail,
             validUsername,
             validPassword
@@ -185,7 +184,7 @@ final class AuthenticationViewController: ViewController {
     private func setUpNetworkActions() {
         // log in
         Signal.combineLatest(email.nonNilValues, password.nonNilValues)
-            .sample(on: logIn.reactive.trigger(for: .touchUpInside))
+            .sample(on: login.reactive.trigger(for: .touchUpInside))
             .flatMap(.latest, transform: authenticator.logIn.apply)
             .take(during: reactive.lifetime)
             .on(value: done)
@@ -193,7 +192,7 @@ final class AuthenticationViewController: ViewController {
 
         // sign up
         Signal.combineLatest(email.nonNilValues, username.nonNilValues, password.nonNilValues)
-            .sample(on: signUp.reactive.trigger(for: .touchUpInside))
+            .sample(on: signup.reactive.trigger(for: .touchUpInside))
             .flatMap(.latest, transform: authenticator.signUp.apply)
             .take(during: reactive.lifetime)
             .on(value: done)

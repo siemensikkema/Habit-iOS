@@ -9,7 +9,7 @@ public class ViewControllerGraph: ViewControllerGraphProtocol {
     public let rootViewController = UIViewController()
 
     public init() {
-        let authenticator: Authenticating = FakeAuthenticator()
+        let authenticator: Authenticating = Authenticator()
         let vc = AuthenticationViewController(authenticator: authenticator) {
             self.rootViewController.dismiss(animated: true, completion: nil)
         }

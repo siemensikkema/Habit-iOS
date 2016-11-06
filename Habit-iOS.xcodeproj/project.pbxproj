@@ -16,7 +16,7 @@
 		5FAC3AB71DCF7B470097569F /* UnclutterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F695D3B1DBE5D9B00D71328 /* UnclutterKit.framework */; };
 		5FAC3AB81DCF7B470097569F /* UnclutterKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5F695D3B1DBE5D9B00D71328 /* UnclutterKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5FAC3ABE1DCFBF770097569F /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F24ED281DBE7667005C86FE /* Core.framework */; };
-		5FAC3AF11DCFC5E50097569F /* CoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAC3AEF1DCFC5E50097569F /* CoreTests.swift */; };
+		5FAC3AF11DCFC5E50097569F /* AuthenticationViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAC3AEF1DCFC5E50097569F /* AuthenticationViewControllerSpec.swift */; };
 		5FAC3AF91DCFD3470097569F /* HabitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAC3AF71DCFD3470097569F /* HabitTests.swift */; };
 		5FDF5A981DC6058900284AB2 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5FDF5A941DC6042F00284AB2 /* Quick.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5FDF5A991DC6059000284AB2 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5FDF5A931DC6042F00284AB2 /* Nimble.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -167,7 +167,7 @@
 		5FAC3AAF1DCF79F50097569F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5FAC3AB01DCF79F50097569F /* Habit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Habit.entitlements; sourceTree = "<group>"; };
 		5FAC3AB11DCF79F50097569F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5FAC3AEF1DCFC5E50097569F /* CoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreTests.swift; sourceTree = "<group>"; };
+		5FAC3AEF1DCFC5E50097569F /* AuthenticationViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewControllerSpec.swift; sourceTree = "<group>"; };
 		5FAC3AF01DCFC5E50097569F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5FAC3AF51DCFCEFE0097569F /* Habit-Test.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Habit-Test.xcconfig"; sourceTree = "<group>"; };
 		5FAC3AF71DCFD3470097569F /* HabitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HabitTests.swift; sourceTree = "<group>"; };
@@ -352,10 +352,10 @@
 		5FAC3AA51DCF79F50097569F /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				5FAC3AA61DCF79F50097569F /* Authenticator.swift */,
-				5FAC3AA71DCF79F50097569F /* Info.plist */,
 				5FAC3AA81DCF79F50097569F /* Scenes */,
+				5FAC3AA61DCF79F50097569F /* Authenticator.swift */,
 				5FAC3AAA1DCF79F50097569F /* ViewControllerGraph.swift */,
+				5FAC3AA71DCF79F50097569F /* Info.plist */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -383,7 +383,7 @@
 		5FAC3AEE1DCFC5E50097569F /* CoreTests */ = {
 			isa = PBXGroup;
 			children = (
-				5FAC3AEF1DCFC5E50097569F /* CoreTests.swift */,
+				5FAC3AEF1DCFC5E50097569F /* AuthenticationViewControllerSpec.swift */,
 				5FAC3AF01DCFC5E50097569F /* Info.plist */,
 			);
 			path = CoreTests;
@@ -672,7 +672,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5FAC3AF11DCFC5E50097569F /* CoreTests.swift in Sources */,
+				5FAC3AF11DCFC5E50097569F /* AuthenticationViewControllerSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
