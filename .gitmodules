@@ -1,3 +1,6 @@
 [submodule "UnclutterKit"]
 	path = UnclutterKit
 	url = https://github.com/siemensikkema/UnclutterKit
+[submodule "Config/xcconfigs"]
+	path = Config/xcconfigs
+	url = https://github.com/jspahrsummers/xcconfigs

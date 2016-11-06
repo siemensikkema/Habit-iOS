@@ -1,2 +1,4 @@
-github "ReactiveCocoa/ReactiveCocoa" "5.0.0-alpha.3"
 github "jmfieldman/Mortar"
+github "Quick/Quick"
+github "Quick/Nimble"
+github "ReactiveCocoa/ReactiveCocoa" "5.0.0-alpha.3"

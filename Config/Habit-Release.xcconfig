@@ -1,0 +1,2 @@
+#include "Habit-Common.xcconfig"
+#include "xcconfigs/Base/Configurations/Release.xcconfig"

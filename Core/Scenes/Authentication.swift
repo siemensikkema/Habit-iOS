@@ -99,7 +99,7 @@ final class AuthenticationViewController: ViewController {
     private let authenticator: Authenticating
     private let done: () -> Void
 
-    private let cancel = UIButton(title: "Cancel")
+    let cancel = UIButton(title: "Cancel")
     private let stack: UIStackView
     private let back = UIButton(title: "Back")
 

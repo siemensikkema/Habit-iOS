@@ -1,6 +1,9 @@
-import Habit
+import Core
 import UIKit
 import UnclutterKit
+
+// trigger copying of libswiftCoreData.dylib so it becomes available to Habit
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

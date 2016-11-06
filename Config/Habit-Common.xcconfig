@@ -1,0 +1,4 @@
+// Link Carthage frameworks automatically
+FRAMEWORK_SEARCH_PATHS = $(SRCROOT)/Carthage/Build/iOS
+
+SWIFT_VERSION = 3.0.1
