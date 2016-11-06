@@ -1,4 +1,7 @@
 // Link Carthage frameworks automatically
-FRAMEWORK_SEARCH_PATHS = $(SRCROOT)/Carthage/Build/iOS
+FRAMEWORK_SEARCH_PATHS = $(inherited) $(SRCROOT)/Carthage/Build/iOS
 
 SWIFT_VERSION = 3.0.1
+PRODUCT_NAME = $(TARGET_NAME)
+INFOPLIST_FILE = $(SRCROOT)/$(TARGET_NAME)/Info.plist
+PRODUCT_BUNDLE_IDENTIFIER = nl.unclutter.$(TARGET_NAME)

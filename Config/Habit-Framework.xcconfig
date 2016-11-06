@@ -1,6 +1,0 @@
-#include "xcconfigs/iOS/iOS-Framework"
-
-PRODUCT_NAME = Core
-
-PRODUCT_BUNDLE_IDENTIFIER = nl.unclutter.HabitCore
-INFOPLIST_FILE = $(SRCROOT)/Core/Info.plist

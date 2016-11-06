@@ -1,0 +1,3 @@
+#include "xcconfigs/iOS/iOS-Framework.xcconfig"
+
+PRODUCT_NAME = Core
