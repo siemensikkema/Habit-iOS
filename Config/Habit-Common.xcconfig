@@ -1,11 +1,9 @@
-// Link Carthage frameworks automatically
-FRAMEWORK_SEARCH_PATHS = $(inherited) $(SRCROOT)/Carthage/Build/iOS
-
 SWIFT_VERSION = 3.0.1
 PRODUCT_NAME = $(TARGET_NAME)
 INFOPLIST_FILE = $(SRCROOT)/$(TARGET_NAME)/Info.plist
 PRODUCT_BUNDLE_IDENTIFIER = nl.unclutter.$(TARGET_NAME)
 CLANG_WARN_SUSPICIOUS_MOVE = YES
+CLANG_ENABLE_MODULES = NO
 
 // Apple LLVM 8.0 - Warnings - All languages
 

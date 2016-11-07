@@ -1,8 +1,9 @@
-import UIKit
 import PlaygroundSupport
-@testable import Habit
+@testable import Core
 
 let currentPage = PlaygroundPage.current
 
 currentPage.needsIndefiniteExecution = true
-currentPage.liveView = AuthenticationViewController(authenticator: FakeAuthenticator()) { print("done!") }
+
+currentPage.liveView = AuthenticationViewController(authenticator: Core.Authenticator()) { print("done!") }
+

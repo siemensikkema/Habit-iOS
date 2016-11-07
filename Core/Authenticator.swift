@@ -7,12 +7,6 @@ protocol Authenticating {
     var signUp: Action<(Email, Username, Password), (), NoError> { get }
 }
 
-final class Credentials {
-    var email: Email?
-    var password: Password?
-    var username: Username?
-}
-
 struct Authenticator: Authenticating {
     var logIn: Action<(Email, Password), (), NoError>
     var resetPassword: Action<Email, (), NoError>
