@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F2E7E441DD10EFB00BCD270 /* AuthenticationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2E7E431DD10EFB00BCD270 /* AuthenticationSpec.swift */; };
 		5FAC3AA21DCF79170097569F /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F24ED281DBE7667005C86FE /* Core.framework */; };
 		5FAC3AA31DCF79170097569F /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5F24ED281DBE7667005C86FE /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5FAC3AB21DCF7A040097569F /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAC3AA61DCF79F50097569F /* Authenticator.swift */; };
@@ -18,8 +19,6 @@
 		5FAC3ABE1DCFBF770097569F /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F24ED281DBE7667005C86FE /* Core.framework */; };
 		5FAC3AF11DCFC5E50097569F /* AuthenticationViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAC3AEF1DCFC5E50097569F /* AuthenticationViewControllerSpec.swift */; };
 		5FAC3AF91DCFD3470097569F /* HabitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAC3AF71DCFD3470097569F /* HabitTests.swift */; };
-		5FDF5A981DC6058900284AB2 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5FDF5A941DC6042F00284AB2 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		5FDF5A991DC6059000284AB2 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5FDF5A931DC6042F00284AB2 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -430,17 +429,6 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5FDF5A971DC6057E00284AB2 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				5FDF5A991DC6059000284AB2 /* Nimble.framework in CopyFiles */,
-				5FDF5A981DC6058900284AB2 /* Quick.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -455,6 +443,7 @@
 		5F2E7DE01DD1047D00BCD270 /* ReactiveCocoa.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactiveCocoa.xcodeproj; path = Carthage/Checkouts/ReactiveCocoa/ReactiveCocoa.xcodeproj; sourceTree = "<group>"; };
 		5F2E7DF81DD1048400BCD270 /* ReactiveSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactiveSwift.xcodeproj; path = Carthage/Checkouts/ReactiveSwift/ReactiveSwift.xcodeproj; sourceTree = "<group>"; };
 		5F2E7E101DD1048E00BCD270 /* Result.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Result.xcodeproj; path = Carthage/Checkouts/Result/Result.xcodeproj; sourceTree = "<group>"; };
+		5F2E7E431DD10EFB00BCD270 /* AuthenticationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationSpec.swift; sourceTree = "<group>"; };
 		5F47D4431DBFBC0000E719F7 /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
 		5F47D4441DBFBC0000E719F7 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		5F47D4481DBFC90C00E719F7 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
@@ -795,6 +784,7 @@
 		5FAC3AEE1DCFC5E50097569F /* CoreTests */ = {
 			isa = PBXGroup;
 			children = (
+				5F2E7E431DD10EFB00BCD270 /* AuthenticationSpec.swift */,
 				5FAC3AEF1DCFC5E50097569F /* AuthenticationViewControllerSpec.swift */,
 				5FAC3AF01DCFC5E50097569F /* Info.plist */,
 			);
@@ -915,7 +905,6 @@
 				5F24ED2C1DBE7667005C86FE /* Sources */,
 				5F24ED2D1DBE7667005C86FE /* Frameworks */,
 				5F24ED2E1DBE7667005C86FE /* Resources */,
-				5FDF5A971DC6057E00284AB2 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -1372,6 +1361,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F2E7E441DD10EFB00BCD270 /* AuthenticationSpec.swift in Sources */,
 				5FAC3AF11DCFC5E50097569F /* AuthenticationViewControllerSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1488,6 +1478,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Habit.app/Habit";
 			};
 			name = Debug;
 		};
@@ -1497,6 +1488,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Habit.app/Habit";
 			};
 			name = Release;
 		};
@@ -1523,6 +1515,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Habit.app/Habit";
 			};
 			name = Debug;
 		};
@@ -1532,6 +1525,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Habit.app/Habit";
 			};
 			name = Release;
 		};
